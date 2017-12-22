@@ -82,6 +82,11 @@ namespace CSharpLibrary
             Console.WriteLine($"2:{listResult2}");
             Console.WriteLine($"3:{listResult3}");
             Console.WriteLine($"4:{listResult4}");
+
+            var listResultOut1 = DiffModel.DiffList(list1, list1, out var diffResult1);
+            var listResultOut2 = DiffModel.DiffList(list1, list2, out var diffResult2);
+            var listResultOut3 = DiffModel.DiffList(list1, list3, out var diffResult3);
+            var listResultOut4 = DiffModel.DiffList(list1, list4, out var diffResult4);
             Console.ReadLine();
         }
     }

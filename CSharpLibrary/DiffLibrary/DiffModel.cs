@@ -22,7 +22,45 @@ namespace CSharpLibrary.DiffLibrary
             return isListEqual;
         }
 
+        public static bool DiffList<T>(List<T> xList, List<T> yList, out List<CreateClass> diffClassList)
+        {
+            var isListEqual = true;
+
+            diffClassList = new List<CreateClass>();
+            foreach (var pair in Enumerable.Zip(xList, yList, (x, y) => new { x, y }))
+            {
+                var isEqual = Diff(pair.x, pair.y, out var diffClass);
+                if (!isEqual)
+                {
+                    isListEqual = false;
+                }
+                diffClassList.Add(diffClass);
+            }
+
+            return isListEqual;
+        }
+
         public static bool Diff<T>(T classX, T classY)
+        {
+            var isClassEqual = true;
+            var properties = classX.GetType().GetProperties();
+
+            foreach (var property in properties)
+            {
+                var x = property.GetValue(classX);
+                var y = property.GetValue(classY);
+
+                if (!x.Equals(y))
+                {
+                    isClassEqual = false;
+                }
+
+            }
+
+            return isClassEqual;
+        }
+
+        public static bool Diff<T>(T classX, T classY, out CreateClass diffClass)
         {
             var isClassEqual = true;
             var properties = classX.GetType().GetProperties();
@@ -48,7 +86,7 @@ namespace CSharpLibrary.DiffLibrary
 
                 diffClassInfo.Add(diffPropertyInfo);
             }
-            var diffClass = CreateDiffClass(diffClassInfo);
+            diffClass = CreateDiffClass(diffClassInfo);
 
             return isClassEqual;
         }
@@ -67,13 +105,13 @@ namespace CSharpLibrary.DiffLibrary
                 diffClass.SetProperty("Is" + property.Name, property.IsEqual, property.IsEqualType);
             }
 
-            // Get
-            foreach (var property in classInfo)
-            {
-                var x = diffClass.GetProperty("X" + property.Name, property.ValueType);
-                var y = diffClass.GetProperty("Y" + property.Name, property.ValueType);
-                var isEqual = diffClass.GetProperty("Is" + property.Name, property.IsEqualType);
-            }
+            // Get Sample
+            //foreach (var property in classInfo)
+            //{
+            //    var x = diffClass.GetProperty("X" + property.Name, property.ValueType);
+            //    var y = diffClass.GetProperty("Y" + property.Name, property.ValueType);
+            //    var isEqual = diffClass.GetProperty("Is" + property.Name, property.IsEqualType);
+            //}
 
             return diffClass;
         }
