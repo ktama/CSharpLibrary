@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreateTypeLibrary\ClassObject.cs" />
+    <Compile Include="CreateTypeLibrary\CreateClass.cs" />
     <Compile Include="DiffLibrary\BaseDiffData.cs" />
     <Compile Include="CreateTypeLibrary\CreateType.cs" />
     <Compile Include="DiffLibrary\DiffModel.cs" />
