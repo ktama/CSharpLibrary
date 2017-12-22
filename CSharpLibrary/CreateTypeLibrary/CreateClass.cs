@@ -98,39 +98,6 @@ namespace CSharpLibrary.CreateTypeLibrary
             }
         }
 
-        /// <summary>
-        /// 指定したプロパティから値を取得する
-        /// </summary>
-        /// <param name="obj">取得する対象のインスタンス</param>
-        /// <param name="propertyName">プロパティ名</param>
-        /// <param name="type">タイプ</param>
-        /// <returns>取得した値</returns>
-        public static object GetProperty(object obj, string propertyName, Type type)
-        {
-            PropertyInfo info = obj.GetType().GetProperty(propertyName, type);
-            if (info == null || !info.CanRead)
-            {
-                return null;
-            }
-            return info.GetValue(obj, null);
-        }
-
-        /// <summary>
-        /// 指定したプロパティに値を設定する
-        /// </summary>
-        /// <param name="obj">取得する対象のインスタンス</param>
-        /// <param name="propertyName">プロパティ名</param>
-        /// <param name="type">タイプ</param>
-        public static void SetProperty(object obj, string propertyName, object value, Type type)
-        {
-            PropertyInfo info = obj.GetType().GetProperty(propertyName, type);
-            if (info == null || !info.CanWrite)
-            {
-                return;
-            }
-            info.SetValue(obj, value, null);
-        }
-
         private const string DEFALT_CLASS_NAME = "UserData";
         public readonly Type ClassType;
         public IUserData Instance { get; set; }
