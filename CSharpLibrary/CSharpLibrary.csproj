@@ -42,10 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseDiffData.cs" />
-    <Compile Include="CreateType.cs" />
-    <Compile Include="DiffLibrary.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="DiffLibrary\BaseDiffData.cs" />
+    <Compile Include="CreateTypeLibrary\CreateType.cs" />
+    <Compile Include="DiffLibrary\DiffModel.cs" />
+    <Compile Include="TestModel\Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

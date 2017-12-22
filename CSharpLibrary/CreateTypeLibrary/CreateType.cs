@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CSharpLibrary
+namespace CSharpLibrary.CreateTypeLibrary
 {
     // 引用元：新米プログラマーの呻き声 || 指定した型のプロパティを持つクラスを動的に生成する
     // https://ameblo.jp/beginner-programmer/entry-10555145784.html

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CSharpLibrary.CreateTypeLibrary;
 
-namespace CSharpLibrary
+namespace CSharpLibrary.DiffLibrary
 {
-    public class DiffLibrary
+    public class DiffModel
     {
         public static bool Diff<T>(T classX, T classY)
         {
