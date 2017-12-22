@@ -7,6 +7,22 @@ namespace CSharpLibrary.DiffLibrary
 {
     public class DiffModel
     {
+        public static bool DiffList<T>(List<T> xList, List<T> yList)
+        {
+            var isListEqual = true;
+
+            foreach (var pair in Enumerable.Zip(xList, yList, (x, y) => new { x, y }))
+            {
+                var isEqual = Diff(pair.x, pair.y);
+                if(!isEqual)
+                {
+                    isListEqual = false;
+                }
+            }
+
+            return isListEqual;
+        }
+
         public static bool Diff<T>(T classX, T classY)
         {
             var isClassEqual = true;
@@ -38,13 +54,14 @@ namespace CSharpLibrary.DiffLibrary
             return isClassEqual;
         }
 
-        private static object CreateDiffClass(List<BaseDiffData> classInfo)
+        private static ClassObject CreateDiffClass(List<BaseDiffData> classInfo)
         {
             var properties = classInfo.ToDictionary(info => "X" + info.Name, info => info.ValueType);
             properties = properties.Concat(classInfo.ToDictionary(info => "Y" + info.Name, info => info.ValueType)).ToDictionary(x => x.Key, y => y.Value);
             properties = properties.Concat(classInfo.ToDictionary(info => "Is" + info.Name, info => info.IsEqualType)).ToDictionary(x => x.Key, y => y.Value);
             var diffClass = new CreateType("PersonClass", properties);
             var diffInstane = diffClass.NewInstance();
+            // Set
             foreach (var property in classInfo)
             {
                 CreateType.SetProperty(diffInstane, "X" + property.Name, property.xValue, property.ValueType);
@@ -52,15 +69,20 @@ namespace CSharpLibrary.DiffLibrary
                 CreateType.SetProperty(diffInstane, "Is" + property.Name, property.IsEqual, property.IsEqualType);
             }
 
+            // Get
             foreach (var property in classInfo)
             {
                 var x = CreateType.GetProperty(diffInstane, "X" + property.Name, property.ValueType);
                 var y = CreateType.GetProperty(diffInstane, "Y" + property.Name, property.ValueType);
                 var isEqual = CreateType.GetProperty(diffInstane, "Is" + property.Name, property.IsEqualType);
-                Console.WriteLine($"DIFF {isEqual}, x:{x}, y:{y}");
             }
 
-            return diffInstane;
+            var diffObject = new ClassObject()
+            {
+                ClassType = diffClass.type_,
+                ClassInstance = diffInstane
+            };
+            return diffObject;
         }
     }
 }
