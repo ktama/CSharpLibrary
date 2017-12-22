@@ -99,7 +99,7 @@ namespace CSharpLibrary.CreateTypeLibrary
         }
 
         private const string DEFALT_CLASS_NAME = "UserData";
-        public readonly Type ClassType;
+        public Type ClassType { get; }
         public IUserData Instance { get; set; }
         #region コンストラクタ
 
