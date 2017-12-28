@@ -56,6 +56,7 @@
     <Compile Include="CreateTypeLibrary\CreateType.cs" />
     <Compile Include="DiffLibrary\DiffModel.cs" />
     <Compile Include="ExcelLibrary\ExcelIO.cs" />
+    <Compile Include="SortLibrary\SortList.cs" />
     <Compile Include="TestModel\Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

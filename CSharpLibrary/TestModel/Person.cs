@@ -6,6 +6,7 @@ namespace CSharpLibrary.TestModel
         public string Name { get; set; }
         public int Age { get; set; }
         public double Heigth { get; set; }
+        public string ID { get; set; }
         //public Person Child { get; set; }
     }
 }

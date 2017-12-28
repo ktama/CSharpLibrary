@@ -13,25 +13,29 @@ namespace CSharpLibrary
             {
                 Name = "ABC",
                 Age = 20,
-                Heigth = 170.0
+                Heigth = 170.0,
+                ID = "0x01"
             };
             var testData2 = new Person()
             {
                 Name = "ABC",
                 Age = 20,
-                Heigth = 170.0
+                Heigth = 170.0,
+                ID = "0x01"
             };
             var testData3 = new Person()
             {
                 Name = "XYZ",
                 Age = 20,
-                Heigth = 170.0
+                Heigth = 170.0,
+                ID = "0x02"
             };
             var testData4 = new Person()
             {
                 Name = "XYZ",
                 Age = 30,
-                Heigth = 180.0
+                Heigth = 180.0,
+                ID = "0x02"
             };
 
             var result1 = DiffModel.Diff(testData1, testData1);
@@ -87,6 +91,55 @@ namespace CSharpLibrary
             var listResultOut2 = DiffModel.DiffList(list1, list2, out var diffResult2);
             var listResultOut3 = DiffModel.DiffList(list1, list3, out var diffResult3);
             var listResultOut4 = DiffModel.DiffList(list1, list4, out var diffResult4);
+
+
+
+            var testData5 = new Person()
+            {
+                Name = "XYZ",
+                Age = 30,
+                Heigth = 180.0,
+                ID = "0x05"
+            };
+            var testData6 = new Person()
+            {
+                Name = "XYZ",
+                Age = 30,
+                Heigth = 185.0,
+                ID = "0x06"
+            };
+            var testData7 = new Person()
+            {
+                Name = "XYZ",
+                Age = 35,
+                Heigth = 190.0,
+                ID = "0x07"
+            };
+            var testData8 = new Person()
+            {
+                Name = "XYZ",
+                Age = 40,
+                Heigth = 200.0,
+                ID = "0x08"
+            };
+            var list5 = new List<Person>()
+            {
+                testData5,
+                testData6,
+            };
+            var list6 = new List<Person>()
+            {
+                testData6,
+                testData7,
+            };
+            var list7 = new List<Person>()
+            {
+                testData7,
+                testData8,
+            };
+            IEnumerable<Person> p1List, p2List, p3List, p4List;
+            SortLibrary.SortList.GetSortedHashList(list5, list6, "ID", out p1List, out p2List);
+            SortLibrary.SortList.GetSortedHashList(list5, list7, "ID", out p3List, out p4List);
             Console.ReadLine();
         }
     }
